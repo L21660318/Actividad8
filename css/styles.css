@@ -1,0 +1,121 @@
+body {
+    font-family: 'Poppins', sans-serif;
+    background: linear-gradient(135deg, #ff6b6b, #f4e3a3);
+    margin: 0;
+    padding: 20px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    min-height: 100vh;
+    color: #333;
+    animation: fade-in 0.5s ease-in-out;
+}
+
+@keyframes fade-in {
+    from {
+        opacity: 0;
+    }
+
+    to {
+        opacity: 1;
+    }
+}
+
+.contenedor {
+    background-color: #fff;
+    padding: 30px;
+    border-radius: 10px;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+    width: 350px;
+    margin: 0 auto;
+    transition: transform 0.2s;
+}
+
+.contenedor:hover {
+    transform: scale(1.02);
+}
+
+h1 {
+    margin-bottom: 20px;
+    font-size: 24px;
+}
+
+#tarea-input {
+    padding: 10px;
+    font-size: 16px;
+    width: calc(100% - 22px);
+    margin-bottom: 10px;
+    border: 2px solid #ff6b6b;
+    border-radius: 5px;
+    transition: border-color 0.3s;
+}
+
+#tarea-input:focus {
+    border-color: #ff007f;
+    outline: none;
+}
+
+button {
+    padding: 10px 15px;
+    font-size: 16px;
+    cursor: pointer;
+    margin-left: 10px;
+    border: none;
+    border-radius: 5px;
+    background-color: #ff007f;
+    color: #fff;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+    transition: background-color 0.3s, transform 0.2s;
+}
+
+button:hover {
+    background-color: #ff0055;
+    transform: translateY(-2px);
+}
+
+ul {
+    list-style-type: none;
+    padding: 0;
+    margin-top: 20px;
+    width: 100%;
+}
+
+li {
+    font-size: 18px;
+    padding: 10px;
+    margin: 5px 0;
+    background-color: #fff;
+    border-radius: 5px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    transition: background-color 0.3s, transform 0.2s;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+}
+
+li:hover {
+    background-color: #f9f9f9;
+    transform: translateY(-2px);
+}
+
+li.completada {
+    text-decoration: line-through;
+    color: gray;
+}
+
+.eliminar {
+    cursor: pointer;
+    color: #ff007f;
+    margin-left: 10px;
+    transition: transform 0.2s;
+}
+
+.eliminar:hover {
+    transform: scale(1.2);
+}
+
+.palomita {
+    display: inline;
+    /* Muestra la palomita si la tarea está completada */
+    color: green;
+}

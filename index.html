@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Lista de Tareas Animada</title>
+    <link rel="stylesheet" href="css/styles.css">
+</head>
+
+<body>
+    <div class="contenedor">
+        <h1>Lista de Tareas</h1>
+        <input type="text" id="tarea-input" placeholder="Nueva tarea...">
+        <button id="agregar-btn">Agregar</button>
+    </div>
+    <ul id="lista-tareas"></ul>
+
+    <script>
+        // Array para almacenar las tareas
+        let tareas = [];
+
+        // Obtener elementos del DOM
+        const tareaInput = document.getElementById('tarea-input');
+        const listaTareas = document.getElementById('lista-tareas');
+        const agregarBtn = document.getElementById('agregar-btn');
+
+        // Función para renderizar las tareas en el DOM
+        function renderizarTareas() {
+            listaTareas.innerHTML = ''; // Limpiar la lista antes de renderizar
+
+            tareas.forEach((tarea, index) => {
+                const li = document.createElement('li');
+                li.className = tarea.completada ? 'completada' : '';
+
+                // Crear la palomita verde (✔️)
+                const palomita = document.createElement('span');
+                palomita.textContent = '✔️';
+                palomita.className = 'palomita';
+
+                // Texto de la tarea
+                const textoTarea = document.createElement('span');
+                textoTarea.textContent = tarea.texto;
+
+                // Botón de eliminar tarea
+                const eliminarBtn = document.createElement('span');
+                eliminarBtn.textContent = '❌';
+                eliminarBtn.className = 'eliminar';
+                eliminarBtn.onclick = (e) => {
+                    e.stopPropagation();
+                    eliminarTarea(index);
+                };
+
+                // Marcar como completada al hacer clic en la tarea
+                li.onclick = () => marcarComoCompletada(index);
+
+                // Añadir la palomita, el texto y el botón de eliminar al li
+                li.appendChild(palomita);
+                li.appendChild(textoTarea);
+                li.appendChild(eliminarBtn);
+                listaTareas.appendChild(li);
+            });
+        }
+
+        // Función para agregar una nueva tarea
+        function agregarTarea() {
+            const texto = tareaInput.value.trim();
+            if (texto) {
+                tareas.push({ texto: texto, completada: false });
+                tareaInput.value = ''; // Limpiar el campo de entrada
+                renderizarTareas();
+            }
+        }
+
+        // Función para eliminar una tarea
+        function eliminarTarea(index) {
+            tareas.splice(index, 1); // Eliminar una tarea del array por su índice
+            renderizarTareas();
+        }
+
+        // Función para marcar una tarea como completada o desmarcarla
+        function marcarComoCompletada(index) {
+            tareas[index].completada = !tareas[index].completada;
+            renderizarTareas();
+        }
+
+        // Evento para agregar tareas al hacer clic en el botón
+        agregarBtn.addEventListener('click', agregarTarea);
+
+        // Permitir agregar tareas al presionar "Enter"
+        tareaInput.addEventListener('keypress', (e) => {
+            if (e.key === 'Enter') {
+                agregarTarea();
+            }
+        });
+
+        // Renderizar la lista inicial (vacía)
+        renderizarTareas();
+    </script>
+</body>
+
+</html>
